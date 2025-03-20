@@ -3,8 +3,11 @@ Implementation for the first day of AOC.
 Link: https://adventofcode.com/2024/day/1
 */
 
-function parseContent(file: string) {
-  const listRaw = file.trim().split("\n");
+async function getFileData() {
+  const file = Bun.file("input.txt");
+  const fileText = await file.text();
+  const listRaw = fileText.trim().split("\n");
+
   const listLeft: number[] = [];
   const listRight: number[] = [];
 
@@ -38,11 +41,9 @@ function calculateSimilarities(leftNumbers: number[], rightNumbers: number[]) {
   return similarities.reduce((prev, act) => prev + act, 0);
 }
 
-(async function () {
+async function main() {
   const distance: number[] = [];
-  const file = Bun.file("input.txt");
-  const fileText = await file.text();
-  const [left, right] = parseContent(fileText);
+  const [left, right] = await getFileData();
 
   left.sort();
   right.sort();
@@ -54,7 +55,9 @@ function calculateSimilarities(leftNumbers: number[], rightNumbers: number[]) {
   const firstQuestion = distance.reduce((prev, act) => prev + act, 0);
   const secondQuestion = calculateSimilarities(left, right);
 
-  console.log("What is the total distance between your lists?:", firstQuestion);
+  console.log("What is the total distance between your lists?", firstQuestion);
 
-  console.log("What is their similarity score?:", secondQuestion);
-})();
+  console.log("What is their similarity score?", secondQuestion);
+}
+
+await main();
