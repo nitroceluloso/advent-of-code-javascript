@@ -1,25 +1,4 @@
-/*
-Implementation for the first day of AOC.
-Link: https://adventofcode.com/2024/day/1
-*/
-
-async function getFileData() {
-  const file = Bun.file("input.txt");
-  const fileText = await file.text();
-  const listRaw = fileText.trim().split("\n");
-
-  const listLeft: number[] = [];
-  const listRight: number[] = [];
-
-  listRaw.forEach((row) => {
-    const [left, right] = row.split("   ");
-
-    listLeft.push(Number(left));
-    listRight.push(Number(right));
-  });
-
-  return [listLeft, listRight];
-}
+import { getFileData } from "./file";
 
 function calculateSimilarities(leftNumbers: number[], rightNumbers: number[]) {
   const foundDictionary = new Map<number, number>();
@@ -34,6 +13,7 @@ function calculateSimilarities(leftNumbers: number[], rightNumbers: number[]) {
       foundDictionary.set(leftElement, count);
       similarity = count;
     }
+
     similarity = similarity ?? (foundDictionary.get(leftElement) as number);
     similarities.push(leftElement * similarity);
   });
@@ -52,12 +32,8 @@ async function main() {
     distance.push(Math.abs(leftEl - right[idx]));
   });
 
-  const firstQuestion = distance.reduce((prev, act) => prev + act, 0);
   const secondQuestion = calculateSimilarities(left, right);
-
-  console.log("What is the total distance between your lists?", firstQuestion);
-
   console.log("What is their similarity score?", secondQuestion);
 }
 
-await main();
+main();
