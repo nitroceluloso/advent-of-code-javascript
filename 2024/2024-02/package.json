@@ -1,8 +1,6 @@
 {
-  "name": "aoc-2024-day-01",
-  "module": "index.ts",
+  "name": "aoc-2024-day-02",
   "type": "module",
-  "packageManager": "bun@1.1.45",
   "scripts": {
     "start:part-one": "bun src/solution.p1.ts",
     "start:part-two": "bun src/solution.p2.ts"
