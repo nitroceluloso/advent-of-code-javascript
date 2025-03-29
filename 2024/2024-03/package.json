@@ -1,0 +1,15 @@
+{
+  "name": "2024-03",
+  "module": "solution.p1.ts",
+  "type": "module",
+  "scripts": {
+    "start:part-one": "bun ./src/solution.p1.ts",
+    "start:part-two": "bun ./src/solution.p2.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
